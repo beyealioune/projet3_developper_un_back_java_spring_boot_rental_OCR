@@ -14,6 +14,7 @@ public class UserDTO {
     private Long id;
     private String email;
     private String name;
+    private String password;
     private Date createdAt;
     private Date updatedAt;
 
@@ -22,6 +23,7 @@ public class UserDTO {
                 .id(user.getId())
                 .email(user.getEmail())
                 .name(user.getName())
+                .password(user.getPassword())
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
                 .build();
