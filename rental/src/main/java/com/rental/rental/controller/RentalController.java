@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -37,5 +38,20 @@ public class RentalController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<RentalDTO>> getAllRentals() {
+        List<RentalDTO> rentals = rentalService.getAllRentals();
+        return ResponseEntity.ok(rentals);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RentalDTO> getRentalById(@PathVariable Long id) {
+        RentalDTO rental = rentalService.getRentalById(id);
+        if (rental != null) {
+            return ResponseEntity.ok(rental);
+        }
+        return ResponseEntity.notFound().build();
     }
 }

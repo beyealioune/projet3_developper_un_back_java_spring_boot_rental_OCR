@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RentalService {
@@ -39,6 +41,21 @@ public class RentalService {
             Rental updatedRental = rentalRepository.save(rental);
             return RentalDTO.fromModel(updatedRental);
         }
-        return null; // Gérer le cas où l'entité n'est pas trouvée
+        return null;
+    }
+
+    public List<RentalDTO> getAllRentals() {
+        List<Rental> rentals = rentalRepository.findAll();
+        return rentals.stream()
+                .map(RentalDTO::fromModel)
+                .collect(Collectors.toList());
+    }
+
+    public RentalDTO getRentalById(Long id) {
+        Rental rental = rentalRepository.findById(id).orElse(null);
+        if (rental != null) {
+            return RentalDTO.fromModel(rental);
+        }
+        return null;
     }
 }
