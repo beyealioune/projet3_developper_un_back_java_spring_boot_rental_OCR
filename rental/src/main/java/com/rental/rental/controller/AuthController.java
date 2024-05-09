@@ -32,6 +32,9 @@ public class AuthController {
     private UserRepository userRepository;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     JwtUtil jwtUtil;
 
 
@@ -74,6 +77,11 @@ public class AuthController {
             System.out.println("Login failed for email: " + userDTO.getEmail());
             return response;
         }
+    }
+
+    @GetMapping("/auth/me")
+    public UserDTO getMe() {
+        return userService.getMe();
     }
 
 

@@ -4,6 +4,7 @@ import com.rental.rental.entities.Rental;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +15,7 @@ public class RentalDTO {
     private String name;
     private Double surface;
     private Double price;
-    private String picture;
+    private String pictureUrl;
     private String description;
     private Long ownerId;
 
@@ -24,9 +25,10 @@ public class RentalDTO {
                 .name(rental.getName())
                 .surface(rental.getSurface())
                 .price(rental.getPrice())
-                .picture(rental.getPicture())
+                .pictureUrl(rental.getPictureUrl()) // Utiliser pictureUrl au lieu de picture
                 .description(rental.getDescription())
-                .ownerId(rental.getOwner().getId())
+                .ownerId(rental.getOwner() != null ? rental.getOwner().getId() : null) // Vérifier si owner est non null
                 .build();
     }
+
 }

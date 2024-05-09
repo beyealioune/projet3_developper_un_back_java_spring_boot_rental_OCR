@@ -2,6 +2,7 @@ package com.rental.rental.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
@@ -24,7 +25,10 @@ public class Rental {
     private Double price;
 
     @Column(name = "picture")
-    private String picture;
+    private String pictureUrl;
+
+    @Transient
+    private MultipartFile picture;
 
     @Column(name = "description", length = 2000)
     private String description;
