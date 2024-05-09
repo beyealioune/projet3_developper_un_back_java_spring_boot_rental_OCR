@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -18,14 +19,14 @@ public class UserDTO {
     private Date createdAt;
     private Date updatedAt;
 
-    public static UserDTO fromModel(User user) {
+    public static UserDTO fromModel(Optional<User> user) {
         return UserDTO.builder()
-                .id(user.getId())
-                .email(user.getEmail())
-                .name(user.getName())
-                .password(user.getPassword())
-                .createdAt(user.getCreatedAt())
-                .updatedAt(user.getUpdatedAt())
+                .id(user.get().getId())
+                .email(user.get().getEmail())
+                .name(user.get().getName())
+                .password(user.get().getPassword())
+                .createdAt(user.get().getCreatedAt())
+                .updatedAt(user.get().getUpdatedAt())
                 .build();
     }
 }
