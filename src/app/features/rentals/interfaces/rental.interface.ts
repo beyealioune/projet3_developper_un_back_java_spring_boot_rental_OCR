@@ -3,7 +3,7 @@ export interface Rental {
 	name: string,
 	surface: number,
 	price: number,
-	picture: string,
+	pictureUrl: string,
 	description: string,
 	owner_id: number,
 	created_at: Date,
