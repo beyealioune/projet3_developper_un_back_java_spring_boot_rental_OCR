@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping
 public class RentalController {
 
     @Autowired
@@ -23,14 +23,14 @@ public class RentalController {
     private String destinationDirectory;
 
 
-    @PostMapping("/rentals")
+    @PostMapping("rentals")
     public ResponseEntity<RentalDTO> createRental(@ModelAttribute RentalDTO rentalDTO,
                                                   @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
         RentalDTO createdRental = rentalService.createRental(rentalDTO, imageFile, destinationDirectory);
         return new ResponseEntity<>(createdRental, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("rentals/{id}")
     public ResponseEntity<RentalDTO> updateRental(@PathVariable Long id, @RequestBody RentalDTO rentalDTO) {
         RentalDTO updatedRental = rentalService.updateRental(id, rentalDTO);
         if (updatedRental != null) {
@@ -40,13 +40,13 @@ public class RentalController {
         }
     }
 
-    @GetMapping
+    @GetMapping("rentals")
     public ResponseEntity<List<RentalDTO>> getAllRentals() {
         List<RentalDTO> rentals = rentalService.getAllRentals();
         return ResponseEntity.ok(rentals);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("rentals/{id}")
     public ResponseEntity<RentalDTO> getRentalById(@PathVariable Long id) {
         RentalDTO rental = rentalService.getRentalById(id);
         if (rental != null) {

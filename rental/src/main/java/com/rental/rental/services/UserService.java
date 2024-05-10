@@ -38,4 +38,10 @@ public class UserService {
         // Conversion de l'utilisateur en DTO
         return UserDTO.fromModel(Optional.of(user.get()));
     }
+
+    public UserDTO getUserById(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
+        return UserDTO.fromModel(Optional.ofNullable(user));
+    }
 }
