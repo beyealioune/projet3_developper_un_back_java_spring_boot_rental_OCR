@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,16 +21,16 @@ public class RentalService {
     @Autowired
     private ImageService imageService;
 
-    public RentalDTO createRental(RentalDTO rentalDTO, MultipartFile imageFile, String destinationDirectory) throws IOException {
+    public RentalDTO createRental(RentalDTO rentalDTO, MultipartFile picture, String destinationDirectory) throws IOException {
         Rental rental = new Rental();
         rental.setName(rentalDTO.getName());
         rental.setSurface(rentalDTO.getSurface());
         rental.setPrice(rentalDTO.getPrice());
         rental.setDescription(rentalDTO.getDescription());
-        String picturePath = imageService.saveImage(imageFile, destinationDirectory);
+        String picturePath = imageService.saveImage(picture, destinationDirectory);
         rental.setPictureUrl(picturePath);
         Rental savedRental = rentalRepository.save(rental);
-        return RentalDTO.fromModel(savedRental);
+        return RentalDTO.modelToDto(savedRental);
     }
 
     public RentalDTO updateRental(Long id, RentalDTO rentalDTO) {
@@ -39,16 +41,20 @@ public class RentalService {
             rental.setPrice(rentalDTO.getPrice());
             rental.setDescription(rentalDTO.getDescription());
             Rental updatedRental = rentalRepository.save(rental);
-            return RentalDTO.fromModel(updatedRental);
+            return RentalDTO.modelToDto(updatedRental);
         }
         return null;
     }
 
-    public List<RentalDTO> getAllRentals() {
+    public Map<String, List<RentalDTO>> getAllRentals() {
         List<Rental> rentals = rentalRepository.findAll();
-        return rentals.stream()
+        List<RentalDTO> rentalDTOs = rentals.stream()
                 .map(RentalDTO::fromModel)
                 .collect(Collectors.toList());
+
+        Map<String, List<RentalDTO>> response = new HashMap<>();
+        response.put("rentals", rentalDTOs);
+        return response;
     }
 
     public RentalDTO getRentalById(Long id) {

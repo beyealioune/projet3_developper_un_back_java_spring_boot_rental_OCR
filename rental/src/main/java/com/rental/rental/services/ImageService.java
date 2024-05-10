@@ -9,11 +9,11 @@ import java.io.IOException;
 @Service
 public class ImageService {
 
-    public String saveImage(MultipartFile imageFile, String destinationDirectory) throws IOException {
-        String fileName = imageFile.getOriginalFilename();
+    public String saveImage(MultipartFile picture, String destinationDirectory) throws IOException {
+        String fileName = picture.getOriginalFilename();
         String filePath = destinationDirectory + File.separator + fileName;
         try (FileOutputStream fos = new FileOutputStream(filePath)) {
-            fos.write(imageFile.getBytes());
+            fos.write(picture.getBytes());
         }
         return filePath;
     }

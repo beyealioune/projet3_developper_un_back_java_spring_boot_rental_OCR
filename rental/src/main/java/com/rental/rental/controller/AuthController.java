@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/")
 public class AuthController {
 
     @Autowired

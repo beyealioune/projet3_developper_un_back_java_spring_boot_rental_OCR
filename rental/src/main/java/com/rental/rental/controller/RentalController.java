@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/")
 public class RentalController {
 
     @Autowired
@@ -25,7 +26,7 @@ public class RentalController {
 
     @PostMapping("rentals")
     public ResponseEntity<RentalDTO> createRental(@ModelAttribute RentalDTO rentalDTO,
-                                                  @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
+                                                  @RequestParam("picture") MultipartFile imageFile) throws IOException {
         RentalDTO createdRental = rentalService.createRental(rentalDTO, imageFile, destinationDirectory);
         return new ResponseEntity<>(createdRental, HttpStatus.CREATED);
     }
@@ -41,10 +42,11 @@ public class RentalController {
     }
 
     @GetMapping("rentals")
-    public ResponseEntity<List<RentalDTO>> getAllRentals() {
-        List<RentalDTO> rentals = rentalService.getAllRentals();
-        return ResponseEntity.ok(rentals);
+    public ResponseEntity<Map<String, List<RentalDTO>>> getAllRentals() {
+        Map<String, List<RentalDTO>> rentalMap = rentalService.getAllRentals();
+        return ResponseEntity.ok(rentalMap);
     }
+
 
     @GetMapping("rentals/{id}")
     public ResponseEntity<RentalDTO> getRentalById(@PathVariable Long id) {
