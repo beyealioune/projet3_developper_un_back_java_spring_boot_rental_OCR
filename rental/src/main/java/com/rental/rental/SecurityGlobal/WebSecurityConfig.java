@@ -27,7 +27,7 @@ public class WebSecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/api/auth/register","/api/auth/login").permitAll()
+                        .requestMatchers("/api/auth/register","/api/auth/login","/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
@@ -45,6 +45,13 @@ public class WebSecurityConfig {
         config.addAllowedHeader("*");
 
         config.addAllowedMethod("*");
+        config.addExposedHeader("Content-Type");
+        config.addExposedHeader("Content-Disposition");
+        config.addExposedHeader("Content-Length");
+        config.addExposedHeader("Cache-Control");
+
+        // Ajouter le chemin pour les images statiques
+        source.registerCorsConfiguration("/images/**", config);
 
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
