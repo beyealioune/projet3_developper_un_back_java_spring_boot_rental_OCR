@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from 'src/app/interfaces/user.interface';
 import { SessionService } from 'src/app/services/session.service';
 import { RentalsService } from '../../services/rentals.service';
@@ -10,7 +10,7 @@ import { RentalsResponse } from '../../interfaces/api/rentalsResponse.interface'
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
 
   public rentals$: Observable<RentalsResponse | null> = this.rentalsService.all();
 
@@ -18,9 +18,7 @@ export class ListComponent implements OnInit {
     private sessionService: SessionService,
     private rentalsService: RentalsService
   ) { }
-  ngOnInit(): void {
-    console.log('rental', this.rentals$);
-  }
+
 
   get user(): User | undefined {
     return this.sessionService.user;
