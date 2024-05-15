@@ -49,18 +49,23 @@ public class RentalService {
     public Map<String, List<RentalDTO>> getAllRentals() {
         List<Rental> rentals = rentalRepository.findAll();
         List<RentalDTO> rentalDTOs = rentals.stream()
-                .map(RentalDTO::fromModel)
+                .map(rental -> {
+                    RentalDTO rentalDTO = RentalDTO.fromModel(rental);
+                    rentalDTO.setPictureUrl(imageService.getImageUrl(rental.getPictureUrl()));
+                    return rentalDTO;
+                })
                 .collect(Collectors.toList());
 
         Map<String, List<RentalDTO>> response = new HashMap<>();
         response.put("rentals", rentalDTOs);
         return response;
     }
-
     public RentalDTO getRentalById(Long id) {
         Rental rental = rentalRepository.findById(id).orElse(null);
         if (rental != null) {
-            return RentalDTO.fromModel(rental);
+            RentalDTO rentalDTO = RentalDTO.fromModel(rental);
+            rentalDTO.setPictureUrl(imageService.getImageUrl(rental.getPictureUrl()));
+            return rentalDTO;
         }
         return null;
     }

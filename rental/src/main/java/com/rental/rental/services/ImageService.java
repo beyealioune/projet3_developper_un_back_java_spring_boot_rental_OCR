@@ -21,8 +21,11 @@ public class ImageService {
     private String uploadDirectory;
 
     public String saveImage(MultipartFile picture, String destinationDirectory) throws IOException {
+        // Générer un nom de fichier unique
         String fileName = UUID.randomUUID().toString() + "_" + picture.getOriginalFilename();
         fileName = fileName.replace(" ", "%20");
+
+        // Chemin complet vers le fichier sur le serveur
         String filePath = destinationDirectory + "/" + fileName;
 
         // Sauvegarder l'image sur le disque
@@ -30,13 +33,11 @@ public class ImageService {
             fos.write(picture.getBytes());
         }
 
-        // Encoder le nom du fichier pour s'assurer que l'URL est valide
-        String encodedFileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
-
-        // Construire l'URL complète de l'image en utilisant l'URL de base et le nom du fichier encodé
-        String imageUrl = baseUrl + "images/" + encodedFileName;
-        return imageUrl;
+        // L'URL relative de l'image à partir du répertoire de destination
+        String relativeImageUrl = "images/" + fileName;
+        return relativeImageUrl;
     }
+
 
 
 
@@ -49,6 +50,10 @@ public class ImageService {
         } else {
             return null;
         }
+    }
+
+    public String getImageUrl(String imageName) {
+        return baseUrl  + imageName;
     }
 
 
