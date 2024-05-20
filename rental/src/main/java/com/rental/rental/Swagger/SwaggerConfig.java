@@ -7,10 +7,17 @@ import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
+/**
+ * Classe de configuration Swagger pour la documentation et la génération d'API.
+ */
 @Configuration
 public class SwaggerConfig {
 
+    /**
+     * Définit un groupe d'API publiques pour Swagger.
+     *
+     * @return GroupedOpenApi configuré pour les chemins d'API publics.
+     */
         @Bean
         public GroupedOpenApi publicApi() {
             return GroupedOpenApi.builder()
@@ -19,13 +26,18 @@ public class SwaggerConfig {
                     .build();
         }
 
+    /**
+     * Configure les métadonnées de l'API pour Swagger.
+     *
+     * @return OpenAPI configuré avec les informations de l'API.
+     */
         @Bean
         public OpenAPI customOpenAPI() {
             return new OpenAPI()
                     .info(new Info()
-                            .title("Votre API")
+                            .title("Rental API")
                             .version("1.0")
-                            .description("Description de votre API")
+                            .description("Voici l'api rental , creer dans le cadre d'un projet OCR par Beye alioune")
                             .termsOfService("http://swagger.io/terms/")
                             .license(new License().name("Apache 2.0").url("http://springdoc.org")));
         }

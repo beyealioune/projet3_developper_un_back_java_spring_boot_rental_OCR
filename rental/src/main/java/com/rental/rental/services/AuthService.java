@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Optional;
 
+/**
+ * Service gérant la logique d'authentification, y compris la connexion et la génération de jetons.
+ */
 @Service
 public class AuthService {
 
@@ -28,9 +31,13 @@ public class AuthService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
+    /**
+     * Authentifie un utilisateur et génère un jeton JWT s'il est réussi.
+     *
+     * @param userDTO les informations de connexion de l'utilisateur.
+     * @return une carte contenant le jeton JWT ou un message d'erreur.
+     */
     public HashMap loginUser(UserDTO userDTO) {
-        System.out.println("Login attempt for email: " + userDTO.getEmail());
 
         HashMap<String, String> response = new HashMap<>();
 

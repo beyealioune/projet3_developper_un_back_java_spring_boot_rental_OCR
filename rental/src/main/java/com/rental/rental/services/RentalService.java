@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Service pour la gestion des locations, y compris la création, la mise à jour,
+ * la récupération de toutes les locations et la récupération d'une location par ID.
+ */
 @Service
 public class RentalService {
 
@@ -21,6 +25,16 @@ public class RentalService {
     @Autowired
     private ImageService imageService;
 
+    /**
+     * Crée une nouvelle location en utilisant les informations fournies dans le DTO de location
+     * et l'image associée.
+     *
+     * @param rentalDTO les informations de la location à créer.
+     * @param picture l'image associée à la location.
+     * @param destinationDirectory le répertoire de destination pour enregistrer l'image.
+     * @return le DTO de la location créée.
+     * @throws IOException si une erreur survient lors de la sauvegarde de l'image.
+     */
     public RentalDTO createRental(RentalDTO rentalDTO, MultipartFile picture, String destinationDirectory) throws IOException {
         Rental rental = new Rental();
         rental.setName(rentalDTO.getName());

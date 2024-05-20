@@ -10,6 +10,9 @@ import com.rental.rental.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service pour la gestion des messages, y compris la création de nouveaux messages.
+ */
 @Service
 public class MessageService {
 
@@ -22,6 +25,12 @@ public class MessageService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Crée un nouveau message basé sur les informations fournies dans le DTO de message.
+     *
+     * @param messageDTO les informations du message à créer.
+     * @return le DTO du message créé.
+     */
     public MessageDTO createMessage(MessageDTO messageDTO) {
         Message message = new Message();
         message.setMessage(messageDTO.getMessage());

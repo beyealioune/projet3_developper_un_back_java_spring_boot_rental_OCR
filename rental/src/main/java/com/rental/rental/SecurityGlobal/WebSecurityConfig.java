@@ -13,7 +13,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-
+/**
+ * Configuration de la sécurité Web pour l'application.
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -21,7 +23,13 @@ public class WebSecurityConfig {
     @Autowired
     TokenFilter tokenFilter;
 
-
+    /**
+     * Configure la chaîne de filtres de sécurité pour l'application.
+     *
+     * @param http Objet HttpSecurity à configurer.
+     * @return SecurityFilterChain configuré.
+     * @throws Exception Si une erreur de configuration se produit.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -34,7 +42,11 @@ public class WebSecurityConfig {
         return http.build();
     }
 
-
+    /**
+     * Configure le filtre CORS pour permettre les requêtes Cross-Origin.
+     *
+     * @return CorsFilter configuré.
+     */
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -56,6 +68,12 @@ public class WebSecurityConfig {
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
+
+    /**
+     * Crée un bean pour l'encodeur BCryptPasswordEncoder utilisé pour le cryptage des mots de passe.
+     *
+     * @return BCryptPasswordEncoder bean.
+     */
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
 

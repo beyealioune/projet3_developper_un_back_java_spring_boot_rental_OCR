@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Service pour la gestion des utilisateurs, y compris la récupération des informations
+ * de l'utilisateur actuellement authentifié et la recherche d'utilisateur par ID ou email.
+ */
 @Service
 public class UserService {
 
