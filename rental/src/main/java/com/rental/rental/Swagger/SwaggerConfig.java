@@ -7,7 +7,6 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
-import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -40,9 +39,9 @@ public class SwaggerConfig {
                 .components(new Components().addSecuritySchemes
                         ("Bearer Authentication", createAPIKeyScheme()))
                 .info(new Info().title("My REST API")
-                        .description("Some custom description of API.")
-                        .version("1.0").contact(new Contact().name("Sallo Szrajbman")
-                                .email( "www.baeldung.com").url("salloszraj@gmail.com"))
+                        .description("API rental creer par Beye alioune.")
+                        .version("1.0").contact(new Contact().name("Beye alioune")
+                                .email( "www.baeldung.com").url("beye@gmail.com"))
                         .license(new License().name("License of API")
                                 .url("API license URL")));
     }
