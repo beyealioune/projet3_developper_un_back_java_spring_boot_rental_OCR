@@ -17,6 +17,16 @@ Base de données ( MySQL)
 
 Installer Mysql , ( phpMyAdmin ) et vérifier les informations d'identification dans le fichier properties . 
 
+Pour installer MySQL et phpMyAdmin et vérifier les informations d'identification dans un fichier de propriétés, vous pouvez suivre les étapes suivantes :
+
+# Installation de MySQL :
+Téléchargement : Rendez-vous sur le site officiel de MySQL (https://dev.mysql.com/downloads/) et téléchargez la version compatible avec votre système d'exploitation.
+
+Installation : Suivez les instructions d'installation fournies par le programme d'installation. Assurez-vous de noter le nom d'utilisateur et le mot de passe sont les mêmes .
+
+# Installation de phpMyAdmin :
+Téléchargement : Allez sur le site officiel de phpMyAdmin (https://www.phpmyadmin.net/downloads/) et téléchargez la dernière version.
+
 # Configuration 
 
 Assurez-vous que la configuration de la base de données est correctement définie dans le fichier application.properties ( mot de passe et nom d'utilisateur pour la connexion à votre base de donnée ) . 
