@@ -54,11 +54,13 @@ public class AuthController {
 
     @PostMapping("auth/login")
     public HashMap loginUser(@RequestBody UserDTO userDTO) {
+
         return authService.loginUser(userDTO);
     }
 
     @GetMapping("auth/me")
     public UserDTO getMe() {
+
         return userService.getMe();
     }
 

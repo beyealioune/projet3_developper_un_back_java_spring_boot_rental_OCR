@@ -23,6 +23,7 @@ public class WebSecurityConfig {
     @Autowired
     TokenFilter tokenFilter;
 
+
     /**
      * Configure la chaîne de filtres de sécurité pour l'application.
      *
@@ -79,4 +80,5 @@ public class WebSecurityConfig {
 
         return new BCryptPasswordEncoder();
     }
+
 }
