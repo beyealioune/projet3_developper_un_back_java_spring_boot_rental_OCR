@@ -46,30 +46,23 @@ public class TokenFilter extends OncePerRequestFilter {
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        // récupérer token présent dans la requête, dans le header authorization
         String header = request.getHeader("Authorization");
 
-        // vérifier qu'il y ait Bearer
         if (header != null && header.startsWith("Bearer")) {
             String jwt = header.substring(7);
             String mail = jwtExtractor.extractUsername(jwt);
 
-            // récupérer l'utilisateur par son email
             Optional<User> userOptional = userRepository.findByEmail(mail);
 
-            // vérifier si l'utilisateur existe
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
 
-                // valider le token avec JwtValidator
-                if (jwtValidator.validateToken(jwt, (UserDetails) user)) { // Utilisez JwtValidator ici
-                    // authentifier l'utilisateur
+                if (jwtValidator.validateToken(jwt, (UserDetails) user)) {
                     SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user, null, ((UserDetails) user).getAuthorities()));
                 }
             }
         }
 
-        // continuer la chaîne de filtres
         filterChain.doFilter(request, response);
     }
 
